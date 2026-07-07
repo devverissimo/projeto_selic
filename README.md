@@ -17,7 +17,7 @@ A resposta óbvia — "Selic sempre bate a inflação, é o ativo mais seguro do
 - Quais eventos econômicos explicam esses períodos (ex: Selic emergencial 2020-21, choque inflacionário 2021-22)
 - Qual foi o rendimento real acumulado no período todo
 
-*(Seção de resultados a preencher após a análise — números e conclusões finais aqui)*
+
 
 ## Fonte de dados
 
