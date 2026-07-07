@@ -44,7 +44,13 @@ Essa seção existe porque a decisão importa mais que a implementação.
 ## Arquitetura
 
 ```
-SGS/BCB API → extract.py → data/raw/ → transform.py → data/processed/ → Power BI
+## Arquitetura
+
+![Arquitetura do pipeline: bronze, silver e gold](docs/images/arquitetura.png)
+
+- `extract.py`: busca as 3 séries na API, salva o JSON bruto (auditoria/reprodutibilidade)
+- `clean.py`: tipagem, deduplicação, validação (bronze → silver)
+- ...
 ```
 
 - `extract.py`: busca as três séries na API, salva o JSON bruto (auditoria/reprodutibilidade)
