@@ -35,7 +35,7 @@ def salvar_silver(df, nome_serie):
     df.to_csv(caminho, index=False)
     print(f"Série {nome_serie} salva em {caminho}.")
     
-for nome_serie in ["SELIC", "IPCA", "META_SELIC"]:
-    df_limpo = limpar_dados(nome_serie)
-    salvar_silver(df_limpo, nome_serie)
+for serie in ["SELIC", "IPCA", "META_SELIC"]:
+    df_limpo = limpar_dados(serie)
+    salvar_silver(df_limpo, serie)
 
