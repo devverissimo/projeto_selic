@@ -13,8 +13,8 @@ CODIGO_SERIE = {
 DATA_INICIAL = '01/01/2016'
 DATA_FINAL = '01/01/2026'
 
-RAW_DIR = Path("proj_selic/data/raw")
-RAW_DIR.mkdir(parents=True, exist_ok=True)
+BRONZE_DIR = Path("proj_selic/data/bronze")
+BRONZE_DIR.mkdir(parents=True, exist_ok=True)
 
 def buscar_dados(codigo_serie, data_inicial, data_final):
     codigo = CODIGO_SERIE[codigo_serie]
@@ -27,7 +27,7 @@ def buscar_dados(codigo_serie, data_inicial, data_final):
     
     dados = resposta.json()
     
-    caminho =  RAW_DIR / f"{codigo_serie.lower()}.json"
+    caminho =  BRONZE_DIR / f"{codigo_serie.lower()}.json"
     with open(caminho, 'w', encoding='utf-8') as f:
         json.dump(dados, f, ensure_ascii=False, indent=2)
            
