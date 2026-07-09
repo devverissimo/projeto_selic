@@ -42,21 +42,10 @@ Essa seção existe porque a decisão importa mais que a implementação.
 - **CSV, não Parquet.** Com ~2.600 linhas (10 anos diário), Parquet não traz ganho de performance — traria só overhead. CSV tem a vantagem de renderizar direto no GitHub, então o dado fica visível sem precisar abrir nada.
 
 ## Arquitetura
-
-```
-## Arquitetura
-
-![Arquitetura do pipeline: bronze, silver e gold](docs/images/arquitetura.png)
+![Arquitetura do pipeline: bronze, silver e gold](https://github.com/devverissimo/projeto_selic/blob/main/docs/images/arquitetura.png)
 
 - `extract.py`: busca as 3 séries na API, salva o JSON bruto (auditoria/reprodutibilidade)
 - `clean.py`: tipagem, deduplicação, validação (bronze → silver)
-- ...
-```
-
-- `extract.py`: busca as três séries na API, salva o JSON bruto (auditoria/reprodutibilidade)
-- `transform.py`: parsing, forward-fill, cálculo de índices acumulados, juro real, marcação de eventos
-- `data/processed/fact_diario.csv`: data, selic_meta, selic_efetiva, ipca_acum_12m, selic_indice_acumulado, ipca_indice_acumulado, indice_real_acumulado, poder_compra_negativo
-- `data/processed/fact_ipca_mensal.csv`: ano_mes, ipca_mensal
 - Power BI consome os CSVs diretamente — sem transformação em Power Query, já chegam tratados
 
 O pipeline roda automaticamente via GitHub Actions (agendado), então o dado no repositório se mantém atualizado sem intervenção manual.
@@ -81,16 +70,22 @@ Isso gera os CSVs em `data/processed/`. Abra `powerbi/projeto_selic.pbix` e cliq
 ```
 projeto_selic/
 ├── data/
-│   ├── raw/
-│   └── processed/
+│   ├── bronze/
+│   │   ├── selic.json
+│   │   ├── ipca.json
+│   │   └── meta_selic.json
+│   ├── silver/
+│   │   ├── selic.csv
+│   │   ├── ipca.csv
+│   │   └── meta_selic.csv
+│   └── gold/
+│       ├── fact_diario.csv
+│       └── fact_ipca_mensal.csv
 ├── src/
-│   ├── extract.py
-│   ├── transform.py
-│   └── pipeline.py
-├── powerbi/
-│   └── projeto_selic.pbix
-├── requirements.txt
-└── README.md
+│   ├── extract.py      → API → bronze
+│   ├── clean.py         → bronze → silver
+│   ├── transform.py     → silver → gold
+│   └── pipeline.py      → orquestra os três em sequência
 ```
 
 ## Limitações
