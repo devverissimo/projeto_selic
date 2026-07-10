@@ -96,11 +96,11 @@ def montar_fact_ipca_mensal():
 # testando a função montar_fact_diario() e montar_fact_ipca_mensal()
 if __name__ == "__main__":
     fact_diario = montar_fact_diario()
-    fact_diario.to_csv(GOLD_DIR / "fact_diario.csv", index=False)
+    fact_diario.to_csv(GOLD_DIR / "fact_diario.csv", index=False, sep=';', decimal=',')
     print(f"Salvo: fact_diario.csv ({len(fact_diario)} registros)")
 
     fact_ipca_mensal = montar_fact_ipca_mensal()
-    fact_ipca_mensal.to_csv(GOLD_DIR / "fact_ipca_mensal.csv", index=False)
+    fact_ipca_mensal.to_csv(GOLD_DIR / "fact_ipca_mensal.csv", index=False, sep=';', decimal=',')
     print(f"Salvo: fact_ipca_mensal.csv ({len(fact_ipca_mensal)} registros)")
 
     print("\nAmostra fact_diario:")
